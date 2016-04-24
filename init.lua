@@ -256,7 +256,7 @@ core.register_node("bamboo:block_dry", {
 })
 
 --spawn
-plantslib:register_generate_plant(
+biome_lib:register_generate_plant(
 	{
 		surface = "default:dirt_with_grass",
 		max_count = 20,
