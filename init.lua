@@ -1,3 +1,5 @@
+local load_time_start = os.clock()
+
 local average_height = 4
 
 minetest.register_craft({
@@ -309,4 +311,10 @@ if minetest.get_modpath("doors") then
 	})
 end
 
-print("[Bamboo] Loaded!")
+minetest.log(
+	'action',
+	string.format(
+		'[Bamboo] loaded in %.3fs',
+		os.clock() - load_time_start
+	)
+)
