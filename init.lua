@@ -193,12 +193,26 @@ core.register_node("bamboo:sapling", {
 })
 
 core.register_abm({
-	nodenames = {"bamboo:bamboo_top"},
-	interval = 30,
-	chance = 5,
+	nodenames = {"bamboo:sapling"},
+	interval = 120,
+	chance = 3,
 	action = function(pos)
 		core.add_node(pos, {name="bamboo:bamboo"})
-		if math.random(0, (average_height)) > 1.0 then
+		local p_top = {x=pos.x, y=pos.y+1, z=pos.z}
+		local n_top = core.get_node(p_top)
+		if n_top.name =="air" then
+			core.add_node(p_top, {name="bamboo:bamboo_top"})
+		end
+	end,
+})
+
+core.register_abm({
+	nodenames = {"bamboo:bamboo_top"},
+	interval = 50,
+	chance = 3,
+	action = function(pos)
+		core.add_node(pos, {name="bamboo:bamboo"})
+		if math.random(5) > 2 then -- 40% chance to stop growing
 			local p_top = {x=pos.x, y=pos.y+1, z=pos.z}
 			local n_top = core.get_node(p_top)
 			if n_top.name =="air" then
@@ -210,24 +224,10 @@ core.register_abm({
 
 core.register_abm({
 	nodenames = {"bamboo:bamboo"},
-	interval = 300,
+	interval = 1800,
 	chance = 2,
 	action = function(pos)
 		core.add_node(pos, { name="bamboo:bamboo_dry" })
-	end,
-})
-
-core.register_abm({
-	nodenames = {"bamboo:sapling"},
-	interval = 30,
-	chance = 10,
-	action = function(pos)
-		core.add_node(pos, {name="bamboo:bamboo"})
-		local p_top = {x=pos.x, y=pos.y+1, z=pos.z}
-		local n_top = core.get_node(p_top)
-		if n_top.name =="air" then
-			core.add_node(p_top, {name="bamboo:bamboo_top"})
-		end
 	end,
 })
 
