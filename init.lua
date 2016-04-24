@@ -23,11 +23,13 @@ minetest.register_craft({
 minetest.register_craftitem("bamboo:item", {
 	description = "Bamboo Damp",
 	inventory_image = "bamboo_item.png",
+	groups = {bamboo=1},
 })
 
 minetest.register_craftitem("bamboo:item_dry", {
 	description = "Bamboo Dry",
 	inventory_image = "bamboo_item_dry.png",
+	groups = {bamboo=1},
 })
 
 core.register_node("bamboo:bamboo_top", {
@@ -39,7 +41,7 @@ core.register_node("bamboo:bamboo_top", {
 	visual_scale = 1.7,
 	paramtype = "light",
 	walkable = false,
-	groups = { snappy = 3,flammable=2, attached_node=1},
+	groups = { snappy = 3,flammable=2, attached_node=1, not_in_creative_inventory=1 },
 	sounds = default.node_sound_leaves_defaults(),
 	selection_box = {
 	type = "fixed",
@@ -281,35 +283,17 @@ if core.get_modpath( 'moreblocks' ) ~= nil then
 	stairsplus.register_nodes ( 'bamboo', { 'block', 'block_dry' } )
 end
 
-if minetest.get_modpath("doors") then
-	doors.register_door("bamboo:door", {
+doors.register("bamboo:door", {
 		description = "Bamboo Door",
-		inventory_image = "bamboo_door.png",
-		groups = {snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=2,door=1},
-		tiles_bottom = {"bamboo_door_b.png", "bamboo_door_top.png"},
-		tiles_top = {"bamboo_door_a.png", "bamboo_door_top.png"},
-		sounds = default.node_sound_wood_defaults(),
-		sunlight = false,
-	})
-
-	minetest.register_craft({
-		output = "bamboo:door",
+		inventory_image = "bamboo_door_item.png",
+		tiles = {{ name = "bamboo_door.png", backface_culling = true }},
+		groups = { snappy=1,choppy=2,oddly_breakable_by_hand=2,flammable=2 },
 		recipe = {
-			{"bamboo:item", "bamboo:item"},
-			{"bamboo:item", "bamboo:item"},
-			{"bamboo:item", "bamboo:item"}
+			{"group:bamboo", "group:bamboo"},
+			{"group:bamboo", "group:bamboo"},
+			{"group:bamboo", "group:bamboo"},
 		}
-	})
-
-	minetest.register_craft({
-		output = "bamboo:door",
-		recipe = {
-			{"bamboo:item_dry", "bamboo:item_dry"},
-			{"bamboo:item_dry", "bamboo:item_dry"},
-			{"bamboo:item_dry", "bamboo:item_dry"}
-		}
-	})
-end
+})
 
 minetest.log(
 	'action',
