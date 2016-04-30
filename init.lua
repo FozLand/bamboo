@@ -298,7 +298,7 @@ doors.register("bamboo:door", {
 minetest.log(
 	'action',
 	string.format(
-		'[Bamboo] loaded in %.3fs',
+		'['..minetest.get_current_modname()..'] loaded in %.3fs',
 		os.clock() - load_time_start
 	)
 )
