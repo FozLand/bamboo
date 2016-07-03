@@ -1,4 +1,3 @@
 default
 biome_lib
-moreblocks?
 doors?

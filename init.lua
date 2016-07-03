@@ -279,10 +279,6 @@ biome_lib:register_generate_plant(
 	"bamboo:bamboo_top"
 )
 
-if core.get_modpath( 'moreblocks' ) ~= nil then
-	stairsplus.register_nodes ( 'bamboo', { 'block', 'block_dry' } )
-end
-
 doors.register("bamboo:door", {
 		description = "Bamboo Door",
 		inventory_image = "bamboo_door_item.png",
